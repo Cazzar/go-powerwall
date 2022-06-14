@@ -13,18 +13,18 @@ package powerwall
 //
 // This structure is returned by the GetStatus function.
 type StatusData struct {
-	Din              string      `json:"din"`
-	StartTime        NonIsoTime  `json:"start_time"`
-	UpTime           Duration    `json:"up_time_seconds"`
-	IsNew            bool        `json:"is_new"`
-	Version          string      `json:"version"`
-	GitHash          string      `json:"git_hash"`
-	CommissionCount  int         `json:"commission_count"`
-	DeviceType       string      `json:"device_type"`
-	SyncType         string      `json:"sync_type"`
-	Leader           string      `json:"leader"`
-	Followers        interface{} `json:"followers"` // TODO: Unsure what type this returns when present
-	CellularDisabled bool        `json:"cellular_disabled"`
+	Din              string     `json:"din"`
+	StartTime        NonIsoTime `json:"start_time"`
+	UpTime           Duration   `json:"up_time_seconds"`
+	IsNew            bool       `json:"is_new"`
+	Version          string     `json:"version"`
+	GitHash          string     `json:"git_hash"`
+	CommissionCount  int        `json:"commission_count"`
+	DeviceType       string     `json:"device_type"`
+	SyncType         string     `json:"sync_type"`
+	Leader           string     `json:"leader"`
+	Followers        any        `json:"followers"` // TODO: Unsure what type this returns when present
+	CellularDisabled bool       `json:"cellular_disabled"`
 }
 
 // GetStatus performs a "status" API call to fetch basic information about the

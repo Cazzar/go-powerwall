@@ -19,14 +19,14 @@ import (
 	"time"
 )
 
-var logFunc = func(v ...interface{}) {}
+var logFunc = func(v ...any) {}
 
 // SetLogFunc registers a callback function which can be used for debug logging
 // of the powerwall library.  The provided function should accept arguments in
 // the same format as Printf/Sprintf/etc.  Note that log lines passed to this
 // function are *not* newline-terminated, so you will need to add newlines if
 // you want to put them out directly to stdout/stderr, etc.
-func SetLogFunc(f func(...interface{})) {
+func SetLogFunc(f func(...any)) {
 	logFunc = f
 }
 
@@ -96,7 +96,7 @@ func NewClient(gatewayAddress string, gatewayLoginEmail string, gatewayLoginPass
 	return c
 }
 
-func (c *Client) logf(format string, v ...interface{}) {
+func (c *Client) logf(format string, v ...any) {
 	logFunc(fmt.Sprintf("{%p} ", c) + fmt.Sprintf(format, v...))
 }
 
@@ -292,7 +292,7 @@ func logBody(api string, body []byte, contentType string) string {
 	}
 }
 
-func (c *Client) apiGetJson(api string, result interface{}) error {
+func (c *Client) apiGetJson(api string, result any) error {
 	respData, err := c.doHttpRequest(api, http.MethodGet, nil, "")
 	if err != nil {
 		return err
@@ -305,7 +305,7 @@ func (c *Client) apiGetJson(api string, result interface{}) error {
 	return nil
 }
 
-func (c *Client) apiPostJson(api string, payload interface{}, result interface{}) error {
+func (c *Client) apiPostJson(api string, payload any, result any) error {
 	payloadData, err := json.Marshal(payload)
 	if err != nil {
 		return err

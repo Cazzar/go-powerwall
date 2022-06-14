@@ -34,28 +34,28 @@ type SystemStatusData struct {
 	SystemIslandState              string  `json:"system_island_state"`
 	AvailableBlocks                int     `json:"available_blocks"`
 	BatteryBlocks                  []struct {
-		Type                   string        `json:"Type"`
-		PackagePartNumber      string        `json:"PackagePartNumber"`
-		PackageSerialNumber    string        `json:"PackageSerialNumber"`
-		DisabledReasons        []interface{} `json:"disabled_reasons"` // TODO: Unclear what type these entries are when present.
-		PinvState              string        `json:"pinv_state"`
-		PinvGridState          string        `json:"pinv_grid_state"`
-		NominalEnergyRemaining float32       `json:"nominal_energy_remaining"`
-		NominalFullPackEnergy  float32       `json:"nominal_full_pack_energy"`
-		POut                   float32       `json:"p_out"`
-		QOut                   float32       `json:"q_out"`
-		VOut                   float32       `json:"v_out"`
-		FOut                   float32       `json:"f_out"`
-		IOut                   float32       `json:"i_out"`
-		EnergyCharged          float32       `json:"energy_charged"`
-		EnergyDischarged       float32       `json:"energy_discharged"`
-		OffGrid                bool          `json:"off_grid"`
-		VfMode                 bool          `json:"vf_mode"`
-		WobbleDetected         bool          `json:"wobble_detected"`
-		ChargePowerClamped     bool          `json:"charge_power_clamped"`
-		BackupReady            bool          `json:"backup_ready"`
-		OpSeqState             string        `json:"OpSeqState"`
-		Version                string        `json:"version"`
+		Type                   string  `json:"Type"`
+		PackagePartNumber      string  `json:"PackagePartNumber"`
+		PackageSerialNumber    string  `json:"PackageSerialNumber"`
+		DisabledReasons        []any   `json:"disabled_reasons"` // TODO: Unclear what type these entries are when present.
+		PinvState              string  `json:"pinv_state"`
+		PinvGridState          string  `json:"pinv_grid_state"`
+		NominalEnergyRemaining float32 `json:"nominal_energy_remaining"`
+		NominalFullPackEnergy  float32 `json:"nominal_full_pack_energy"`
+		POut                   float32 `json:"p_out"`
+		QOut                   float32 `json:"q_out"`
+		VOut                   float32 `json:"v_out"`
+		FOut                   float32 `json:"f_out"`
+		IOut                   float32 `json:"i_out"`
+		EnergyCharged          float32 `json:"energy_charged"`
+		EnergyDischarged       float32 `json:"energy_discharged"`
+		OffGrid                bool    `json:"off_grid"`
+		VfMode                 bool    `json:"vf_mode"`
+		WobbleDetected         bool    `json:"wobble_detected"`
+		ChargePowerClamped     bool    `json:"charge_power_clamped"`
+		BackupReady            bool    `json:"backup_ready"`
+		OpSeqState             string  `json:"OpSeqState"`
+		Version                string  `json:"version"`
 	} `json:"battery_blocks"`
 	FfrPowerAvailabilityHigh   float32         `json:"ffr_power_availability_high"`
 	FfrPowerAvailabilityLow    float32         `json:"ffr_power_availability_low"`

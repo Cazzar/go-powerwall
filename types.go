@@ -25,7 +25,7 @@ func (v *NonIsoTime) UnmarshalJSON(p []byte) error {
 	return err
 }
 
-// Durations in the API are typically represented as strings in duration-string
+// Duration in the API are typically represented as strings in duration-string
 // format ("1h23m45.67s", etc).  Go's time.Duration type actually produces this
 // format natively, yet will not parse it as an input when unmarshalling JSON
 // (grr), so we need a custom type (with a custom UnmarshalJSON function) to
@@ -46,6 +46,14 @@ func (v *Duration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.String())
 }
 
+// The Alert type is for the type of "decoded_alert" as part of GridFault
+// This was included because it can be of
+type Alert struct {
+	Name  string `json:"name"`
+	Value any    `json:"value"`
+	Units string `json:"units"`
+}
+
 // The DecodedAlert type is used for unpacking values in the "decoded_alert"
 // field of GridFault structures.  These are actually encoded as a string,
 // which itself contains a JSON representation of a list of maps, each one
@@ -56,14 +64,9 @@ func (v *Duration) MarshalJSON() ([]byte, error) {
 // Needless to say, this encoding is rather cumbersome and redundant, so we
 // instead provide a custom JSON decoder to decode these into a string/string
 // map in the form 'name: value'.
-type DecodedAlert map[string]string
+type DecodedAlert []Alert
 
 func (v *DecodedAlert) UnmarshalJSON(data []byte) error {
-	type entry struct {
-		Name  string `json:"name"`
-		Value string `json:"value"`
-	}
-
 	strvalue := ""
 	err := json.Unmarshal(data, &strvalue)
 	if err != nil {
@@ -73,14 +76,14 @@ func (v *DecodedAlert) UnmarshalJSON(data []byte) error {
 		// For an empty string, just return a nil map
 		return nil
 	}
-	entries := []entry{}
+	entries := []Alert{}
 	err = json.Unmarshal([]byte(strvalue), &entries)
 	if err != nil {
 		return err
 	}
-	*v = make(map[string]string, len(entries))
-	for _, e := range entries {
-		(*v)[e.Name] = e.Value
+	*v = make(DecodedAlert, len(entries))
+	for i, e := range entries {
+		(*v)[i] = e
 	}
 	return nil
 }

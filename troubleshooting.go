@@ -9,7 +9,7 @@ package powerwall
 //
 // This structure is returned by the GetProblems function.
 type TroubleshootingProblemsData struct {
-	Problems []interface{} `json:"problems"` // TODO: Unsure what type these values are when present
+	Problems []any `json:"problems"` // TODO: Unsure what type these values are when present
 }
 
 // GetProblems returns info about "troubleshooting problems" currently reported

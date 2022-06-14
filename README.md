@@ -1,5 +1,7 @@
 # go-powerwall
 
+BASED OFF/ORIGINAL: https://github.com/foogod/go-powerwall/
+
 A Go library for communicating with Tesla Powerwall appliances via the local-network API.
 
 ---
@@ -90,7 +92,7 @@ For an example of this, see the `--authcache` option of the [powerwall-cmd](cmd/
 If something is not working properly, it may be useful to get debug logging of what the `powerwall` library is doing behind the scenes (including HTTP requests/responses, etc).  You can register a logging function for this purpose using `powerwall.SetLogFunc`:
 
 ```go
-func myLogFunc(v ...interface{}) {
+func myLogFunc(v ...any) {
         msg := fmt.Sprintf(v...)
 	fmt.Printf("powerwall: %s\n", msg)
 }

@@ -1,3 +1,3 @@
-module github.com/foogod/go-powerwall
+module go-powerwall
 
-go 1.17
+go 1.18

@@ -10,15 +10,16 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
 	"strings"
 	"time"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/jessevdk/go-flags"
 
-	"github.com/foogod/go-powerwall"
+	"github.com/cazzar/go-powerwall"
 )
 
 var options struct {
@@ -36,7 +37,7 @@ var options struct {
 	} `positional-args:"true" required:"true"`
 }
 
-func logDebug(v ...interface{}) {
+func logDebug(v ...any) {
 	log.Debug(v...)
 }
 
@@ -197,7 +198,7 @@ func main() {
 	}
 }
 
-func writeResult(value interface{}) {
+func writeResult(value any) {
 	b, err := json.MarshalIndent(value, "", "    ")
 	if err != nil {
 		panic(err)
