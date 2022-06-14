@@ -1,3 +1,3 @@
-module go-powerwall
+module github.com/cazzar/go-powerwall
 
 go 1.18
